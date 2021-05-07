@@ -1,0 +1,311 @@
+perfect squares sum to a given num:
+class Solution:
+    def numSquares(self, n: int) -> int:
+        no_perfect = 0
+        squares = []
+        for i in range(1,int(n**0.5)+1):
+            squares.append(i**2)
+        v = []
+        
+        def printAllSubsetsRec(arr, n, v, Sum):
+
+            
+            if (Sum == 0):
+                return len(v)
+
+            if (Sum < 0):
+                return sys.maxsize
+
+            
+            if (n == 0):
+                return sys.maxsize
+
+            
+            x = printAllSubsetsRec(arr, n - 1, v, Sum)
+
+            
+            v.append(arr[n - 1])
+            y = printAllSubsetsRec(arr, n, v,
+                                   Sum - arr[n - 1])
+            v.pop(len(v) - 1)
+
+            return min(x, y)
+
+        
+        def printAllSubsets(arr, n, Sum):
+
+            v = []
+            return printAllSubsetsRec(arr, n, v, Sum)
+
+        
+        arr = squares
+        Sum = n
+        m = len(arr)
+
+        return printAllSubsets(arr, m, Sum)
+        
+
+######################
+
+    def reverseWords(self, s: str) -> str:
+        out = ""
+        arr = s.split()
+        rev_arr = arr[::-1]
+        for i in rev_arr: 
+            out += i+" "  
+    
+   
+            
+            
+        return out[:len(out)-1]
+##############################################
+--> next permutation:
+class Solution:
+    def nextPermutation(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: void Do not return anything, modify nums in-place instead.
+        """
+        #>right
+        i = len(nums)-1
+        while i-1>=0 and nums[i-1]>=nums[i]:
+            i -=1
+        #>left
+        if i-1>=0:
+            j = i
+            while j<len(nums) and nums[j]>nums[i-1]:
+                j +=1
+            #swap the min-max number
+            nums[i-1],nums[j-1] = nums[j-1],nums[i-1]
+        m = i
+        n = len(nums)-1
+        while m < n:
+            nums[m],nums[n] = nums[n],nums[m]
+            m +=1
+            n -=1
+###########################################################
+check this-->
+
+if __name__ == '__main__':
+    x = int(raw_input())
+    y = int(raw_input())
+    z = int(raw_input())
+    n = int(raw_input())
+    out = []
+    for i in range(x+1):
+        if(i<=y):
+            for j in range(y+1):
+                if(j<=z):
+                    arr=[]
+                    for k in range(z+1):
+                        
+                        if(i+j+k !=n):
+                            out.append([i,j,k])
+    print(out)
+               
+##################
+crct ans-->
+
+if __name__ == '__main__':
+    x = int(raw_input())
+    y = int(raw_input())
+    z = int(raw_input())
+    n = int(raw_input())
+    out = []
+    for i in range(x+1):
+        for j in range(y+1):
+                for k in range(z+1):
+                        
+                        if(i+j+k !=n):
+                            out.append([i,j,k])
+    print(out)
+                            
+                            
+                
+##############################
+if __name__ == '__main__':
+    stds = []
+    mrks = []
+    mrks_without_dup = []
+    out_arr = []
+    
+    for _ in range(int(input())):
+        name = input()
+        score = float(input())
+        stds.append([name,score])
+    
+    l = len(stds)
+    for i in stds:
+        mrks.append(i[1])
+    mrks.sort()
+    for i in mrks:
+        if(i not in mrks_without_dup):
+            mrks_without_dup.append(i)
+    second_lowest = mrks_without_dup[1]
+    
+    for i in stds:
+        if(i[1]==second_lowest):
+            out_arr .append(i[0])
+    out_arr.sort()
+    for j in out_arr:
+        print(j)
+######################################
+T = int(input())
+while(T):
+  a = input().split()
+  n = int(a[0])
+  k = int(a[1])
+  sum_ken = 0
+  sum_amar = 0
+  b = input().split()
+  c = input().split()
+  
+  b = [int(i) for i in b]
+  c = [int(i) for i in c]
+  b.sort()
+  c.sort()
+  for i in range(k,0,-1):
+    sum_ken = sum_ken + b[i]
+  for i in range(k,0,-1):
+    sum_amar = sum_amar + c[i]
+  if(sum_ken > sum_amar):
+    print("WIN")
+  else:
+    print("LOSE")
+  T = T -1
+#############################################
+if __name__ == '__main__':
+    stds = []
+    mrks = []
+    mrks_without_dup = []
+    out_arr = []
+    
+    for _ in range(int(input())):
+        name = input()
+        score = float(input())
+        stds.append([name,score])
+    
+    l = len(stds)
+    for i in stds:
+        mrks.append(i[1])
+    mrks.sort()
+    for i in mrks:
+        if(i not in mrks_without_dup):
+            mrks_without_dup.append(i)
+    second_lowest = mrks_without_dup[1]
+    
+    for i in stds:
+        if(i[1]==second_lowest):
+            out_arr .append(i[0])
+    out_arr.sort()
+    for j in out_arr:
+        print(j)
+    
+#######################################################
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'climbingLeaderboard' function below.
+#
+# The function is expected to return an INTEGER_ARRAY.
+# The function accepts following parameters:
+#  1. INTEGER_ARRAY ranked
+#  2. INTEGER_ARRAY player
+#
+
+def climbingLeaderboard(ranked, player):
+    # Write your code here
+    ans = []
+    for i in player:
+        ranked.append(i)
+        res = []
+        [res.append(x) for x in ranked if x not in res]
+        res.sort(reverse=True)
+        ans.append(res.index(i)+1)
+    return ans
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    ranked_count = int(input().strip())
+
+    ranked = list(map(int, input().rstrip().split()))
+
+    player_count = int(input().strip())
+
+    player = list(map(int, input().rstrip().split()))
+
+    result = climbingLeaderboard(ranked, player)
+
+    fptr.write('\n'.join(map(str, result)))
+    fptr.write('\n')
+
+    fptr.close()
+
+###################################
+li1 = ['A','B','C','D']
+li2 = ['B','C']
+uncomman_elements = list(set(li1) - set(li2)) + list(set(li2) - set(li1))
+print(uncomman_elements)
+for i in uncomman_elements:
+    out1 = 0
+    out2 = 0
+    for j in str(ord(i)):
+        
+        out1 = out1 + int(j)
+    for k in str(out1):
+        out2 = out2 + int(k)
+    print(out1)
+    print(out2)
+    
+###############################################
+i1 = 3521
+i2 = 2452
+i3 = 1352
+
+# l_th = 0
+# l_h =0
+# l_t = 0
+# l_u = 0
+# s_th = 9
+# s_h = 9
+# s_t = 9
+# s_u = 9
+
+# print(i1%10)
+# print(int((i1/10)%10))
+# print(int(i1/100)%10)
+# print(int(i1/1000))
+
+
+
+if (i1%10 >= i2%10) and (i1%10 >= i3%10):
+   l_u = i1%10
+elif (i2%10 >= i1%10) and (i2%10 >= i3%10):
+   l_u = i2%10
+else:
+   l_u = i3%10
+   
+   
+if (int((i1/10)%10) >= int((i2/10)%10)) and (int((i1/10)%10) >= int((i3/10)%10)):
+   l_t = int((i1/10)%10)
+elif (int((i2/10)%10) >= int((i1/10)%10)) and (int((i2/10)%10) >= int((i3/10)%10)):
+   l_t = int((i2/10)%10)
+else:
+    l_t = int((i3/10)%10)
+    
+if (int((i1/10)%10) >= int((i2/10)%10)) and (int((i1/10)%10) >= int((i3/10)%10)):
+   l_t = int((i1/10)%10)
+elif (int((i2/10)%10) >= int((i1/10)%10)) and (int((i2/10)%10) >= int((i3/10)%10)):
+   l_t = int((i2/10)%10)
+else:
+    l_t = int((i3/10)%10)
+   
+
+
+##############################################
