@@ -1,3 +1,126 @@
+###########################################################3
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        ListNode r = new ListNode();
+        ListNode rev = r, p=head, q;
+        while(p!=null){
+            ListNode t = new ListNode();
+            t.val=p.val;
+            t.next = rev.next;
+            rev.next = t;
+            p = p.next;
+        }
+        rev = rev.next;
+        while(rev!=null) {
+            if(rev.val !=head.val)
+                 return (false);
+            head = head.next;
+            rev = rev.next;
+        }
+        return (true);
+    }
+}
+#################################################
+// class Solution {
+//     ListNode pleft;
+//     public boolean isPalindrome(ListNode head) {
+//         pleft = head;
+//         boolean res= isPalindromeHelper(head);
+//         return res;
+//     }
+    
+//     public boolean isPalindromeHelper(ListNode right){
+//         if(right==null){
+//             return true;
+//         }
+        
+//         boolean rres = isPalindromeHelper(right.next);
+//         if(rres==false){
+//             return false;
+//         }else if(pleft.val != right.val){
+//             return false;
+//         }else{
+//             pleft = pleft.next;
+//             return true;
+//         }
+//     }
+//  }
+
+
+#####################################################
+class Solution {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    
+        
+        ListNode dummy = new ListNode();
+        ListNode currentl1 = l1;
+        ListNode currentl2 = l2;
+        ListNode megedLinkedList = dummy;
+        while(currentl1 != null || currentl2 != null){
+            
+            if(currentl1 == null ){
+               megedLinkedList.next = currentl2;
+                break;
+            }
+            
+            if(currentl2 == null){
+                megedLinkedList.next = currentl1;
+                break;
+            }
+            
+        
+            if(currentl1.val  >  currentl2.val){
+                megedLinkedList.next =  currentl2;
+                currentl2 = currentl2.next;
+            }else{
+                megedLinkedList.next =  currentl1;
+                currentl1 = currentl1.next;
+            }
+            
+            megedLinkedList = megedLinkedList.next;
+        }
+        
+      return dummy.next;
+        
+    }
+}
+###########################################################
+def solve(s):
+    
+    t = ""
+    t = t + s[0].capitalize()
+    for i in range(1,len(s)):
+        if(s[i-1]==" "):
+            
+            t = t + s[i].upper()
+        else:
+            t = t +s[i]
+        
+        
+        
+        
+    
+    return t
+####################################
+def merge_the_tools(string, k):
+    # your code goes here
+    s = []
+    for i in range(0,len(string),k):
+        s.append(string[i:k])
+        k = k+k
+    
+    for i in s:
+        o = ""
+        for j in i:
+            if j not in o:
+                o = o+j
+        print(o) 
+        
+
+if __name__ == '__main__':
+    string, k = input(), int(input())
+    merge_the_tools(string, k)
+###################################################
 perfect squares sum to a given num:
 class Solution:
     def numSquares(self, n: int) -> int:
@@ -309,3 +432,83 @@ else:
 
 
 ##############################################
+# Enter your code here. Read input from STDIN. Print output to STDOUT\
+arr=input().split()
+n=int(arr[0])
+m=int(arr[1])
+# first half
+for i in range(int(n/2)):
+    for j in range(int(n/2)-i):
+        print("---", end="")
+    for k in range(1+i*2):
+        print(".|.", end="")
+    for j in range(int(n/2)-i):
+        print("---", end="")
+    print()
+    
+# welcome
+for i in range(int((m-7)/2)):
+    print("-", end="")
+print("WELCOME", end="")
+for i in range(int((m-7)/2)):
+    print("-", end="")
+print()
+
+# second half
+for i in range(int(n/2)-1, -1, -1):
+    for j in range(int(n/2)-i):
+        print("---", end="")
+    for k in range(1+i*2):
+        print(".|.", end="")
+    for j in range(int(n/2)-i):
+        print("---", end="")
+    print()
+##########################################################
+def print_formatted(number):
+    # your code goes here
+    for i in range(1,number+1):
+        decimal = i
+        
+        # print(decimal,end=" ")
+        # print("  ",end="")
+        # print(decimal,end=" ")
+        # print()
+        # Python program to convert decimal into other number systems
+        
+
+        
+        binary = bin(decimal)
+        octal = oct(decimal)
+        hexa = hex(decimal)
+         
+        # s=""
+        # while(i):
+        #     s=s+str(int(i%2))
+        #     i=int(i/2)
+        # binary = (s[::-1])
+        print(decimal,end="   ")
+        print(str(octal[2:]),end="   ")
+        print(str(hexa[2:]).upper(),end = "   ")
+        print(str(binary[2:]),end="   ")
+        print()
+        
+
+if __name__ == '__main__':
+    n = int(input())
+    print_formatted(n)
+###########################################################
+def print_formatted(number):
+    # your code goes here
+    w = len(str(bin(number)).replace('0b',''))
+
+    for i in range(1, number+1):
+        b = bin(int(i)).replace('0b','').rjust(w, ' ')
+        o = oct(int(i)).replace('0o','', 1).rjust(w, ' ')
+        h = hex(int(i)).replace('0x','').upper().rjust(w, ' ')
+        j = str(i).rjust(w, ' ')
+        print(j, o, h, b)
+    
+        
+
+if __name__ == '__main__':
+#############################################################
