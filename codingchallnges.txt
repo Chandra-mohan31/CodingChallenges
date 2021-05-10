@@ -1,4 +1,269 @@
-###########################################################3
+class Solution {
+    public int minDepth(TreeNode root) {
+        if(root == null){
+            return 0;
+        }else if(root.right==null){
+            return 1+minDepth(root.left);
+        }else if(root.left == null){
+            return 1+minDepth(root.right);
+        }
+        else{
+            return 1+min(minDepth(root.left),minDepth(root.right));
+        }
+    }
+    static int min(int a, int b){
+        if(a<b)
+            return a;
+        else
+            return b;
+    }
+}
+_________________________________________________________
+class Solution {
+    public int maxDepth(TreeNode root) {
+        if (root == null)
+            return 0;
+        else
+            return 1+max(maxDepth(root.left), maxDepth(root.right));
+    }
+    static int max(int a, int b){
+        if(a>b)
+            return a;
+        else
+            return b;
+    }
+    public boolean isBalanced(TreeNode root) {
+        if(root == null){
+            return true;
+        }
+        else if(Math.abs(maxDepth(root.left)-maxDepth(root.right))>1){
+            return false;
+            
+        }else{
+            return isBalanced(root.right) && isBalanced(root.left);
+        }
+        
+    }
+   
+    
+}
+_______________________________________________________________________________
+class Solution {
+    public TreeNode sortedArrayToBST(int[] nums) {
+        return createBST(nums, 0, nums.length-1);
+    }
+    
+    private TreeNode createBST(int[] nums, int left, int right) {
+        if(right < left) {
+            return null;
+        }
+        int mid = (right + left)/2;
+        TreeNode leftTree = createBST(nums, left, mid-1);
+        TreeNode rightTree = createBST(nums, mid+1, right);
+        TreeNode node = new TreeNode(nums[mid], leftTree, rightTree);
+        return node;
+    }
+}
+______________________________________________________________________
+class Solution {
+    public int maxDepth(TreeNode root) {
+        if (root == null)
+            return 0;
+        else
+            return 1+max(maxDepth(root.left), maxDepth(root.right));
+    }
+    static int max(int a, int b){
+        if(a>b)
+            return a;
+        else
+            return b;
+    }
+    
+}
+_____________________________________________________________________
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        return(check(root, root));
+    }
+    static boolean check(TreeNode p, TreeNode q){
+        if(p == null && q == null)
+            return true;
+        if((p == null && q !=null) || (p != null && q == null))
+            return false;
+        else if(p.val != q.val) 
+            return false;
+        return check(p.left, q.right) && check(p.right, q.left);
+    }
+}
+------------------------------------------------------------
+class Solution {
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+            
+        if (p == null && q == null) return true;
+        if ((p != null && q == null)||(p == null && q != null)) return false;
+        else if(p.val != q.val) return false;
+        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+             
+    }
+}
+--------------------------------------------------------------------------------
+check the code;
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+//         boolean x = true;
+//         if (p != null && q!=null) {
+//             if(p.val != q.val){
+//                 x = false;
+//             }
+//             else if((p==null || q==null) && (p!=null || q != null) ){
+//                 x = false;
+//             }
+//             else{
+//                 x = isSameTree(p.left,q.left);
+//             }
+//             // x = isSameTree(p.left,q.left);
+//             // x = isSameTree(p.left,q.right);
+            
+//         }
+//         return x;
+        boolean x=true;
+        if(p==null && q==null){
+            x = true;
+        }
+        else if((p==null || q==null) && (p!=null || q != null) ){
+            x = false;
+        }
+        else if(p.val != q.val){
+            x = false;
+        }
+        else if (p != null && q != null) {
+            x = isSameTree(p.left,q.left);
+            
+            x = isSameTree(p.right,q.right);
+        }
+        return x;
+        
+     
+    }
+}
+____________________________________________________________________________________________________________________
+public class Tree { 
+    static class Node {    
+    int value; 
+        Node left, right; 
+          
+        Node(int value){ 
+            this.value = value; 
+            left = null; 
+            right = null; 
+        } 
+    } 
+       
+    public void insert(Node node, int value) {
+        if (value < node.value) { if (node.left != null) { insert(node.left, value); } else { System.out.println(" Inserted " + value + " to left of " + node.value); node.left = new Node(value); } } else if (value > node.value) {
+          if (node.right != null) {
+            insert(node.right, value);
+          } else {
+            System.out.println("  Inserted " + value + " to right of "
+                + node.value);
+            node.right = new Node(value);
+          }
+        }
+      }
+     public void traverseInOrder(Node node) {
+        if (node != null) {
+            traverseInOrder(node.left);
+            System.out.print(" " + node.value);
+            traverseInOrder(node.right);
+        }
+     }
+     
+     public static void main(String args[]) 
+    { 
+    Tree tree = new Tree();
+                Node root = new Node(5);
+                System.out.println("Binary Tree Example");
+                System.out.println("Building tree with root value " + root.value);
+                tree.insert(root, 2);
+                tree.insert(root, 4);
+                tree.insert(root, 8);
+                tree.insert(root, 6);
+                tree.insert(root, 7);
+                tree.insert(root, 3);
+                tree.insert(root, 9);
+                System.out.println("Traversing tree in order");
+                tree.traverseLevelOrder();
+                
+              }
+}
+  
+____________________________________________________________________________________________________________
+public class Solution {
+    public int climbStairs(int n) {
+        int memo[] = new int[n + 1];
+        return climb_Stairs(0, n, memo);
+    }
+    public int climb_Stairs(int i, int n, int memo[]) {
+        if (i > n) {
+            return 0;
+        }
+        if (i == n) {
+            return 1;
+        }
+        if (memo[i] > 0) {
+            return memo[i];
+        }
+        memo[i] = climb_Stairs(i + 1, n, memo) + climb_Stairs(i + 2, n, memo);
+        return memo[i];
+    }
+}
+---------------------------------------------------------------
+public class Solution {
+    public int climbStairs(int n) {
+        return climb_Stairs(0, n);
+    }
+    public int climb_Stairs(int i, int n) {
+        if (i > n) {
+            return 0;
+        }
+        if (i == n) {
+            return 1;
+        }
+        return climb_Stairs(i + 1, n) + climb_Stairs(i + 2, n);
+    }
+}
+################################################
+class Solution {
+    public int arrangeCoins(int n) {
+        int rows_full = 0;
+ 
+        int i = 1;
+        while(i<=n){
+            n = n - i;
+            i++;
+            rows_full++;
+            
+            
+        }
+        return rows_full;
+    }
+}
+###########################################################
 class Solution {
     public boolean isPalindrome(ListNode head) {
         ListNode r = new ListNode();
