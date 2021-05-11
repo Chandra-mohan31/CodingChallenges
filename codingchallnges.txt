@@ -1,4 +1,174 @@
 class Solution {
+    static int Findfrequency(int ele,int[] nums){
+        int count = 0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]==ele){
+                count = count + 1;
+            }
+        }
+        // System.out.print(count);
+        return count;
+    }
+    public int majorityElement(int[] nums) {
+        int mostrepeated = 0;
+        int rept_val = 0;
+        int frequency;
+        for(int i=0;i<nums.length;i++){
+            if(Findfrequency(nums[i],nums)>mostrepeated){
+                mostrepeated = Findfrequency(nums[i],nums);
+                rept_val = nums[i];
+            }
+        }
+        // System.out.print(rept_val);
+        return rept_val;
+    }
+}
+_________________________________________________________
+class Solution {
+    public int getDecimalValue(ListNode head) {
+        String binaryString="";
+        while(head != null){
+            binaryString = binaryString + Integer.toString(head.val);
+            head = head.next;
+        }
+        int decimal=Integer.parseInt(binaryString,2);  
+        return decimal;
+    }
+} 
+   static boolean hasCycle(SinglyLinkedListNode head) {
+        // boolean out = false;
+        // ArrayList<Integer>  = new ArrayList<String>();
+        int size = 0;
+        
+        // SinglyLinkedList a = new SinglyLinkedList();
+        // SinglyLinkedList b = head;
+        while(head != null){
+            if(size >1000){
+                return true;
+            }
+            
+            // if(head.data ){
+                
+            // }
+            // System.out.println(head.data);
+            head = head.next;
+            size++;
+        }
+        
+        return false;
+
+    }
+______________________________________
+class Solution {
+    // public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    //     ListNode a = new ListNode();
+    //     ListNode ans = a;
+    //     int carr=0, sum;
+    //     while(l1 != null || l2 != null){
+    //         ListNode node = new ListNode();
+    //         // ans = ans.next;
+    //         if(carr != 0)
+    //             node.val += carr;
+    //         sum = l1.val+l2.val;
+    //         if(sum>9){
+    //             carr = sum/10;
+    //             sum %= 10;
+    //         }
+    //         node.val += sum;
+    //         // System.out.println(sum+" "+carr+"  "+ node.val);
+    //         l1 = l1.next;
+    //         l2 = l2.next;
+    //         ans.next = node;
+    //         ans = ans.next;
+    //         // System.out.println(ans.next.val);
+    //     }
+    //     a=a.next;
+    //     return(a);
+    // }
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    ListNode dummyHead = new ListNode(0);
+    ListNode p = l1, q = l2, curr = dummyHead;
+    int carry = 0;
+    while (p != null || q != null) {
+        int x = (p != null) ? p.val : 0;
+        int y = (q != null) ? q.val : 0;
+        int sum = carry + x + y;
+        carry = sum / 10;
+        curr.next = new ListNode(sum % 10);
+        curr = curr.next;
+        if (p != null) p = p.next;
+        if (q != null) q = q.next;
+    }
+    if (carry > 0) {
+        curr.next = new ListNode(carry);
+    }
+    return dummyHead.next;
+}
+}
+_______________________________________________________________________
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        
+        List<List<Integer>> pascal = new ArrayList<>();
+        
+        pascal.add(new ArrayList<>());
+        pascal.get(0).add(1);
+        
+        
+        for (int row = 1; row < numRows; row++)
+        {
+            for (int col = 0; col < row+1; col++)
+            {
+                int left = (col == 0)  ? 0 : pascal.get(row-1).get(col-1);
+                int right = (col == row) ? 0: pascal.get(row-1).get(col);
+                
+                if (col ==0)
+                    pascal.add(new ArrayList<>());
+                
+                pascal.get(row).add(left+right);
+            }
+           
+        }
+        
+        return pascal;
+    }
+}
+______________________________________________
+class Solution:
+    def generate(self, numRows: int) -> List[List[int]]:
+        arr = []
+        for i in range(numRows):
+            b=[]
+            b.append(1)
+            for j in range(1, i):
+                b.append(arr[i-1][j-1]+arr[i-1][j])
+            if i>0:
+                b.append(1)
+            arr.append(b)
+        return arr
+________________________________________________________________________
+class Solution {
+    boolean hasPathSum = false;
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        findPath(root, new int[1], targetSum);
+        return hasPathSum;
+    }
+    
+    public void findPath(TreeNode root, int[] sum, int targetSum) {
+        if(root == null)
+            return;
+        sum[0]+=root.val;
+        if(root.left == null && root.right == null) {
+            if(sum[0] == targetSum)
+                hasPathSum = true;
+        }
+        findPath(root.left, sum, targetSum);
+        findPath(root.right, sum, targetSum);
+        sum[0]-=root.val;
+    }
+}
+______________________________________________
+class Solution {
     public int minDepth(TreeNode root) {
         if(root == null){
             return 0;
