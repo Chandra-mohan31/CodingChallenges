@@ -1,3 +1,607 @@
+class Solution
+{
+    void deleteNode(Node del)
+    {
+         // Your code here
+         Node t = del.next;
+         del.data = t.data;
+         del.next = t.next;
+         t = null;
+        //  Node p = del;
+        //  if(p.next == null){
+        //      Node t = p;
+        //      p.next = null;
+        //      p = t;
+        //  }
+        //  if(p.next != null && p.next.next != null){
+        //      p.next = p.next.next;
+             
+        //  }
+         
+    }
+}
+________________________________________________
+class Solution
+{
+    //Function to sort a linked list of 0s, 1s and 2s.
+    static Node segregate(Node head)
+    {
+        // add your code here
+        Node p = head;
+        Node out = new Node(0);
+        Node out_out = out;
+        Node a = new Node(0);
+        Node q = a;
+        Node b = new Node(0);
+        Node r = b;
+        Node c = new Node(0);
+        Node s = c;
+        
+        while(p != null){
+            Node t = new Node(p.data);
+            if(p.data == 0){
+                q.next = t;
+                q = q.next;
+            }
+            else if(p.data == 1){
+                r.next = t;
+                r = r.next;
+            }else if(p.data == 2){
+                s.next = t;
+                s = s.next;
+            }
+            // q.next = t;
+            // q = q.next;
+            p = p.next;
+        }
+        
+        q.next = (b.next!=null)
+? (b.next) : (c.next);
+        r.next = c.next;
+        s.next = null;
+        // Updated head
+        head = a.next;
+        return head;
+        
+        
+    }
+}
+__________________________________________________________
+class MyStack 
+{
+    StackNode top;
+    
+    //Function to push an integer into the stack.
+    void push(int a) 
+    {
+        // Add your code here
+        StackNode t = new StackNode(a);
+        if(top == null){
+            top = t;
+            return;
+        }
+        t.next = top;
+        top = t;
+        
+    }
+    
+    //Function to remove an item from top of the stack.
+    int pop() 
+    {
+        // Add your code here
+        int a = -1;
+        if(top == null){
+            return a;
+        }
+        // StackNode t = top;
+        a = top.data;
+        top = top.next;
+        return a;
+        
+        
+    }
+}
+_____________________________________________________
+class MyQueue
+{
+    QueueNode front, rear;
+    
+    //Function to push an element into the queue.
+	void push(int a)
+	{
+        // Your code here
+    QueueNode temp = new QueueNode(a);
+    if(rear == null){
+        front = rear = temp;
+        return;
+    }
+    rear.next = temp;
+    rear = temp;
+	}
+	
+    //Function to pop front element from the queue.
+	int pop()
+	{
+	    int a = -1;
+	    if (front == null)
+            return a;
+        // Your code here
+        
+        QueueNode temp = front;
+        front = front.next;
+        
+        
+        a = temp.data;
+        if(front == null){
+            rear = null;
+            
+        }
+        
+        return a;
+        
+	}
+}
+
+________________________________________________________________________
+class Solution{
+    //Function to add two numbers represented by linked list.
+    static Node addTwoLists(Node first, Node second){
+        // code here
+        // return head of sum list
+         Node L1 = new Node(0);
+        Node l1 = L1;
+        Node L2 = new Node(0);
+        Node l2 = L2;
+        Node Fin = new Node(0);
+        Node fin = Fin;
+        Node a = new Node(0);
+        Node ans = a;
+        int carr=0, sum=0;
+        boolean x=true;
+        Node p,q;
+        p = first;
+        q = second;
+        while(p != null){
+            Node temp = new Node(p.data);
+            temp.next = l1.next;
+            l1.next = temp;
+            p = p.next;
+        }
+        while(q != null){
+            Node temp = new Node(q.data);
+            temp.next = l2.next;
+            l2.next = temp;
+            q = q.next;
+        }
+        // Add
+        // return l1;
+        while((l1 != null || l2 != null) && x){
+            Node node = new Node(0);
+            // node.data=0;
+            sum=0;
+            if(carr != 0)
+                sum += carr;
+            if(l1 != null && l2 != null){
+                sum += l1.data+l2.data;
+                if(sum>9){
+                    carr = sum/10;
+                    sum %= 10;
+                }
+                else
+                    carr=0;
+                node.data += sum;
+                l1 = l1.next;
+                l2 = l2.next;
+            }
+            else if(l1 == null && l2 != null){
+                sum += l2.data;
+                if(sum>9){
+                    carr = sum/10;
+                    sum %= 10;
+                }
+                else
+                    carr=0;
+                node.data = sum;
+                l2 = l2.next;
+            }
+            else if(l2 == null && l1 != null){
+                sum += l1.data;
+                if(sum>9){
+                    carr = sum/10;
+                    sum %= 10;
+                }
+                else
+                    carr=0;
+                node.data = sum;
+                l1 = l1.next;
+            }
+            else if(carr != 0){
+                node.data = sum;
+                ans.next = node;
+                ans = ans.next;
+                x=false;
+            }
+            ans.next = node;
+            ans = ans.next;
+        }
+        if(carr != 0){
+            Node node = new Node(0);
+            node.data = carr;
+            ans.next = node;
+            ans = ans.next;
+        }
+        a=a.next.next;
+        while(a != null){
+            Node temp = new Node(a.data);
+            temp.next = fin.next;
+            fin.next = temp;
+            a = a.next;
+        }
+        fin = Fin.next;
+        return(fin);
+    }
+}
+_______________________________________
+class Solution {
+    // Function to pairwise swap elements of a linked list.
+    // It should returns head of the modified list
+    public Node pairwiseSwap(Node head)
+    {
+        if (head == null || head.next == null) {
+            return head;
+        }
+ 
+        // Initialize previous and current pointers
+        Node prev = head;
+        Node curr = head.next;
+ 
+        head = curr; // Change head before proceeding
+ 
+        // Traverse the list
+        while (true) {
+            Node next = curr.next;
+            curr.next = prev; // Change next of current as previous node
+ 
+            // If next NULL or next is the last node
+            if (next == null || next.next == null) {
+                prev.next = next;
+                break;
+            }
+ 
+            // Change next of previous to next next
+            prev.next = next.next;
+ 
+            // Update previous and curr
+            prev = next;
+            curr = prev.next;
+        }
+        return head;
+    }
+}
+________________________________________________________
+class GfG
+{
+    //Function to find the data of nth node from the end of a linked list.
+    int getNthFromLast(Node head, int n)
+    {
+    	// Your code here
+    	int size = 0;
+    	int val = 0;
+    	Node p = head;
+    	while(p != null){
+    	    size = size + 1;
+    	    p = p.next;
+    	}
+    	if(n>size){
+    	    return -1;
+    	}
+    	int x = size - n;
+    	
+    	    
+    	int y = 1;
+    	Node q = head;
+    	while(q != null && x>0){
+    	    
+    	    q = q.next;
+    	    x = x-1;
+    	    
+    	}
+    	return q.data;
+    }
+}
+
+_______________________________
+class Solution
+{
+    static void rmloo(Node loop,Node curr){
+        Node ptr1 = null;
+        Node ptr2 = null;
+        ptr1 = curr;
+        while(1 == 1){
+            ptr2 = loop;
+            while(ptr2.next != loop && ptr2.next != ptr1){
+                ptr2 = ptr2.next;
+            }
+            if(ptr2.next == ptr1){
+                break;
+            }
+            ptr1 = ptr1.next;
+        }
+        ptr2.next = null;
+    }
+    //Function to remove a loop in the linked list.
+    public static void removeLoop(Node head){
+        // code here
+        // remove the loop without losing any nodes
+        Node p = head;
+        Node q = head;
+        int size = 0;
+        while(p != null && q != null && q.next != null){
+            p = p.next;
+            q = q.next.next;
+            if(p == q){
+                rmloo(p,head);
+                
+                break;
+                
+            }
+        }
+    }
+}
+_________________________________
+
+class Intersect
+{
+    //Function to find intersection point in Y shaped Linked Lists.
+	int intersectPoint(Node head1, Node head2)
+	{
+         // code here
+        Node p,q;
+        p = head1;
+        q = head2;
+        int l1=0,l2=0;
+        while(p != null){
+            p=p.next;
+            l1++;
+        }
+        while(q != null){
+            q=q.next;
+            l2++;
+        }
+        p = head1;
+        q = head2;
+        int dif;
+        if(l1>l2){
+            dif = l1-l2;
+            while(p != null && dif>0){
+                p = p.next;
+                dif--;
+            }
+        }
+        else{
+            dif = l2-l1;
+            while(q != null && dif>0){
+                q = q.next;
+                dif--;
+            }
+        }
+        while(p != null && q != null){
+            if(p==q)
+                return p.data;
+            p = p.next;
+            q = q.next;
+        }
+        return -1;
+	}
+}
+___________________________________
+class Intersect
+{
+    //Function to find intersection point in Y shaped Linked Lists.
+	int intersectPoint(Node head1, Node head2)
+	{
+         Node p = head1;
+         Node q = head2;
+         while(p!=null && q != null){
+            //  System.out.println(p.data);
+             
+            //  System.out.println(q.data);
+            
+            if(p.data == q.data){
+                return p.data;
+            }else{
+                if(p.next != null){
+                    p = p.next;
+                }else{
+                    p = head1;
+                }
+            }
+            
+            
+            
+             if(q.next != null){
+                 q = q.next;
+             }else{
+                 q = head2;
+             }
+             
+            //  q = q.next;
+             
+         }
+         
+         return -1;
+	}
+}
+
+__________________________________
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+t = input()
+t = int(t)
+while(t>0):
+    input2 = input()
+    count = 0
+    n_d = 0
+    no_repeat = True
+    alp = input2.isalnum()
+    l = len(input2)
+    
+    arr = list(input2)
+    r = []
+    for i in arr:
+        if(i.isalpha()):
+            count = count + 1
+        if(i.isdigit()):
+            n_d = n_d + 1
+        if(i not in r):
+            r.append(i)
+        else:
+            no_repeat = False
+    if(count>=2 and n_d>=3 and alp and no_repeat and l==10):
+        print("Valid")
+    else:
+        print("Invalid")
+    t = t-1
+    ______________________________________
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        int l = nums.length;
+        
+        
+        for(int i=0;i<l;i++){
+            if(nums[i] == val){
+                for(int j=i;j<l-1;j++){
+                    nums[j] = nums[j+1];
+                }
+                l--;
+                i--;
+            }
+            
+            
+        }
+        return l;
+    }
+}
+______________________________________
+
+class Solution{
+    //Function to rotate a linked list.
+    public Node rotate(Node head, int k) {
+        // add code here
+        Node p = head;
+        Node q = new Node(0);
+        Node l = q;
+        Node x = new Node(0);
+        Node y = x;
+        Node out = new Node(0);
+        while(k>0 && p != null){
+            Node t = new Node(p.data);
+            l.next = t;
+            l = l.next;
+            k = k-1;
+            p = p.next;
+        }
+        while(p != null){
+            Node m = new Node(p.data);
+            y.next = m;
+            y = y.next;
+            p = p.next;
+        }
+        out = x;
+        while(out.next != null){
+            out = out.next;
+        }
+        out.next = q.next;
+        
+        return x.next;
+        
+    }
+}
+______________________________________
+
+class Solution
+{
+    //Function to reverse a linked list.
+    Node reverseList(Node head)
+    {
+        Node p = head;
+        Node q = new Node(0);
+        while(p != null){
+            Node temp = new Node(p.data);
+            temp.next = q.next;
+            q.next = temp;
+            p = p.next;
+        }
+        return q.next;
+    }
+}
+_______________________________________________________________________________
+class Solution
+{
+    int getMiddle(Node head)
+    {
+         Node p = head;
+         int len = 0;
+         while(p!=null){
+             
+             len = len+1;
+             p = p.next;
+         }
+         int mid = len/2;
+         p = head;
+         while(mid>0 && p!=null){
+             mid = mid-1;
+             
+             p = p.next;
+             
+             
+         }
+        
+         return p.data;
+    }
+}
+__________________________________________________________________
+
+class Solution {
+    // static int Findfrequency(int ele,int[] nums){
+    //     int count = 0;
+    //     for(int i=0;i<nums.length;i++){
+    //         if(nums[i]==ele){
+    //             count = count + 1;
+    //         }
+    //     }
+    //     // System.out.print(count);
+    //     return count;
+    // }
+    public int majorityElement(int[] nums) {
+        // int mostrepeated = 0;
+        // int rept_val = 0;
+        // int frequency;
+        // for(int i=0;i<nums.length;i++){
+        //     if(Findfrequency(nums[i],nums)>mostrepeated){
+        //         mostrepeated = Findfrequency(nums[i],nums);
+        //         rept_val = nums[i];
+        //     }
+        // }
+        // System.out.print(rept_val);
+        // return rept_val;
+        int index=0;
+        int count = 0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]==nums[index]){
+                count++;
+            }else{
+                count--;
+            }
+            if(count<0){
+                index = i;
+                count = 1;
+            }
+        }
+        return nums[index];
+    }
+}
+_________________________________________________________
+
 class Solution {
     static int Findfrequency(int ele,int[] nums){
         int count = 0;
