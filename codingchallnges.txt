@@ -1,3 +1,320 @@
+class Tree
+{
+    //Function to return list containing elements of left view of binary tree.
+    ArrayList<Integer> leftView(Node root)
+    {
+      // Your code here
+      ArrayList<Integer> out = new ArrayList<Integer>();
+      Node p = root;
+      
+      while(p != null){
+          out.add(p.data);
+          if(p.left != null){
+            //   out.add(p.data);
+              p = p.left;
+          }else if(p.left == null && p.right != null){
+              p = p.right;
+            //   out.add(p.data);
+          }else if(p.left == null && p.right == null){
+            //   out.add(p.data);
+              break;
+          }else{
+              break;
+          }
+          
+      }
+      return out;
+      
+    }
+}
+#############################################################################
+class Solution
+{
+    
+    //Function to find maximum of each subarray of size k.
+    static ArrayList <Integer> max_of_subarrays(int arr[], int n, int k)
+    {
+        // Your code here
+        ArrayList<Integer> out = new ArrayList<Integer>();
+   
+        int j, max;
+
+        for (int i = 0; i <= n - k; i++) {
+
+            max = arr[i];
+
+            for (j = 1; j < k; j++) {
+                if (arr[i + j] > max)
+                    max = arr[i + j];
+            }
+            // System.out.print(max + " ");
+            out.add(max);
+        }
+        return out;
+    }
+}
+###################################################
+class Solution
+{
+    
+    //Function to find maximum of each subarray of size k.
+    static ArrayList <Integer> max_of_subarrays(int arr[], int n, int k)
+    {
+        // Your code here
+        ArrayList<Integer> out = new ArrayList<Integer>();
+        int i = 0;
+        int j;
+        while(i<=arr.length-k){
+            
+            int max = 0;
+            for(j=i;j<i+k;j++){
+                // int new_a[] = new int[20];
+                if(arr[j]>=max){
+                    max = arr[j];
+                    
+                }
+                
+            //   out.add(max);         
+            }
+            // System.out.print(max);
+            out.add(max);
+            i = i+1;
+        }
+        return out;
+    }
+}
+################################################
+class Solution
+{
+//Function to find starting point where the truck can start to get through
+//the complete circle without exhausting its petrol in between.
+// Queue<Integer> a = new LinkedList<Integer>();
+// Queue<Integer> b = new LinkedList<Integer>();
+// int x,y;
+int tour(int petrol[], int distance[]) {
+int size = petrol.length;
+int index = -1;
+int i = 0;
+int balance = 0;
+boolean circleStarted = false;
+
+while (i != index) {
+if (circleStarted && index == -1) {
+break;
+}
+if (index == -1)
+index = i;
+
+int first = petrol[i] + balance;
+int second = distance[i];
+
+if (first - second < 0) {
+index = -1;
+balance = 0;
+} else {
+balance = first - second;
+}
+i++;
+if (i == size) {
+i = 0;
+circleStarted = true;
+}
+}
+return index;
+}
+}
+#############################################
+class GfG
+{
+    int minEle = 10000;
+    Stack<Integer> s = new Stack<Integer>();
+
+    /*returns min element from stack*/
+    int getMin()
+    {
+	// Your code here
+// 	while(!s.isEmpty()){
+// 	    if()
+// 	}
+    if(s.isEmpty()){
+        return -1;
+    }else{
+        return minEle;
+    }
+    // for(int i=0;i<=s.size();i++){
+    //     if(minEle < s.get(i)){
+    //         minEle = s.get(i);
+    //     }
+    // }
+    // return minEle;
+    }
+    
+    /*returns poped element from stack*/
+    int pop()
+    {
+    if(s.isEmpty()){
+        return -1;
+    }
+	// Your code here	
+	int x = s.pop();
+	if(x == minEle){
+	    minEle = 10000;
+	    for(int i=0;i<s.size();i++){
+	        if(minEle > s.get(i)){
+	            minEle = s.get(i);
+	        }
+	    }
+	}
+	return x;
+    }
+
+    /*push element x into the stack*/
+    void push(int x)
+    {
+	// Your code here
+	if(x < minEle){
+	    minEle = x;
+	}
+	
+	s.push(x);
+	
+	
+    }	
+}
+################################################################
+class Queues
+{
+    Queue<Integer> q1 = new LinkedList<Integer>();
+    Queue<Integer> q2 = new LinkedList<Integer>();
+    
+    //Function to push an element into stack using two queues.
+    void push(int a)
+    {
+	    // Your code here	
+	    q1.add(a);
+    }
+    
+    //Function to pop an element from stack using two queues. 
+    int pop()
+    {
+       int a;
+	    // Your code here
+	    if(q1.isEmpty()){
+            return -1;
+        }
+	   // Your code here
+	   while(true){
+	       a = q1.remove();
+	       if(q1.isEmpty()){
+	           break;
+	       }
+	       q2.add(a);
+	   }
+	   
+	   
+	   
+	   //System.out.println(y);
+	   
+	   while(!q2.isEmpty()){
+	       int x = q2.remove();
+	       q1.add(x);
+	   }
+	   
+	   return a;
+    }
+	
+}
+_________________________________________________________
+
+Hashmap in java:
+
+	key value pairs;
+	extends abstract map;
+	a single key cant contain more than one value but any value can contain differen keys;
+	int hash,
+	k key,
+	v value,
+	Node,
+	Next.
+***************************************************************
+class StackQueue
+{
+    Stack<Integer> s1 = new Stack<Integer>();
+    Stack<Integer> s2 = new Stack<Integer>();
+
+    //Function to push an element in queue by using 2 stacks.
+    void Push(int x)
+    {
+	   // Your code here
+	   s1.push(x);
+	   
+	   
+    }
+	
+    
+    //Function to pop an element from queue by using 2 stacks.
+    int Pop()
+    {
+        if(s1.isEmpty()){
+            return -1;
+        }
+	   // Your code here
+	   while(!s1.isEmpty()){
+	       int x = s1.pop();
+	       s2.push(x);
+	   }
+	   
+	   
+	   int y = s2.pop();
+	   
+	   while(!s2.isEmpty()){
+	       int x = s2.pop();
+	       s1.push(x);
+	   }
+	   
+	   return y;
+    }
+}______________
+class Solution
+{
+    
+    //Function to check if brackets are balanced or not.
+    static boolean ispar(String x)
+    {
+        // add your code here
+        Stack<Character> s = new Stack<Character>();
+        for(int i=0;i<x.length();i++){
+            char y = x.charAt(i);
+            if (y == '(' || y == '[' || y == '{'){
+                s.push(y);
+            }
+            if(s.isEmpty()){
+                return false;
+            }
+            char popped;
+            if(y == ')'){
+                popped = s.pop();
+                if(popped == '[' || popped == '{'){
+                    return false;
+                }
+            }else if(y == '}'){
+                popped = s.pop();
+                if(popped == '(' || popped == '['){
+                    return false;
+                }
+            }else if( y == ']'){
+                popped = s.pop();
+                if(popped == '{' || popped == '('){
+                    return false;
+                }
+            }
+            
+        }
+        return s.isEmpty();
+        
+    }
+}
+________________________________________________________
 class Solution
 {
     void deleteNode(Node del)
