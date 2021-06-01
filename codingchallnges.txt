@@ -1,3 +1,721 @@
+class Solution {
+    static void swap(int[] arr, int i, int j)
+    {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
+    
+    static int partition(int[] arr, int low, int high)
+    {
+
+        
+        int pivot = arr[high];
+
+        
+        int i = (low - 1);
+
+        for(int j = low; j <= high - 1; j++)
+        {
+
+            
+            if (arr[j] < pivot)
+            {
+
+                
+                i++;
+                swap(arr, i, j);
+            }
+        }
+        swap(arr, i + 1, high);
+        return (i + 1);
+    }
+
+   
+    static int[] quickSort(int[] arr, int low, int high)
+    {
+        if (low < high)
+        {
+
+           
+            int pi = partition(arr, low, high);
+
+            // Separately sort elements before
+            // partition and after partition
+            quickSort(arr, low, pi - 1);
+            quickSort(arr, pi + 1, high);
+        }
+        return arr;
+    }
+    
+    public int minPairSum(int[] nums) {
+        int max_sum = 0;
+        int n = nums.length;
+        int l = 0;
+        int k = nums.length - 1;
+        int[] sorted_arr = quickSort(nums,0,nums.length - 1);
+       
+        int i = 0;
+        while(i < n/2){
+            if(nums[l]+nums[k] > max_sum){
+                max_sum = nums[l]+nums[k];
+            }
+            l = l+1;
+            k = k-1;
+            i++;
+        }
+        
+        return max_sum;
+        
+        
+    }
+}
+###########################################################################
+class Solution {
+    public int countGoodSubstrings(String s) {
+        int count = 0;
+        for (int i = 0; i < s.length(); i++){
+            for (int j = i+1; j <= s.length(); j++){
+                // System.out.println(s.substring(i, j));
+                String s1 = s.substring(i,j);
+                boolean status = false;
+                if(s1.length() == 3){
+                    if(s1.charAt(0) != s1.charAt(1) && s1.charAt(1) != s1.charAt(2) && s1.charAt(0) != s1.charAt(2)){
+                    status = true;
+                }
+                }
+                
+                
+                if(status){
+                    count++;
+                }
+            }
+        }
+          
+        return count;
+            
+    }
+}
+#####################################################
+class Solution {
+    public boolean checkZeroOnes(String s) {
+        int r_one=0, r_zero=0, i, j, l, l_zero=0,l_one=0;
+        l = s.length();
+        for(i=0;i<l;i++){
+            if(s.charAt(i)=='1'){
+                l_one=1;
+                j=i+1;
+                while(j<l && s.charAt(j) == '1'){
+                    l_one++;
+                    j++;
+                }
+                if(r_one<l_one)
+                    r_one=l_one;
+                i=j-1;
+            }
+                
+            else if(s.charAt(i)=='0'){
+                l_zero=1;
+                j=i+1;
+                while(j<l && s.charAt(j) == '0'){
+                    l_zero++;
+                    j++;
+                }
+                if(r_zero<l_zero)
+                    r_zero=l_zero;
+                i=j-1;
+            }
+            
+            
+        }
+        
+        if(r_one>r_zero)
+            return true;
+        return false;
+    }
+}
+#############################################################
+
+
+class Solution {
+    public int[] countBits(int n) {
+        int ans[] = new int[n+1];
+        for(int i=0;i<=n;i++){
+            int c_ones = 0;
+            String val = Integer.toBinaryString(i);
+            for(int j=0;j<val.length();j++){
+                if(val.charAt(j) == '1'){
+                    c_ones++;
+                }
+            }
+            ans[i] = c_ones;
+        }
+        return ans;
+    }
+}
+############################################
+class Solution {
+    public int maxSubArray(int[] a) {
+     
+        int size = a.length;
+        int max_so_far = Integer.MIN_VALUE, max_ending_here = 0;
+        for (int i = 0; i < size; i++)
+        {
+            max_ending_here = max_ending_here + a[i];
+            // System.out.println(a[i]+"--"+max_ending_here);
+            if (max_so_far < max_ending_here){
+                max_so_far = max_ending_here;
+            }
+            
+            if (max_ending_here < 0){
+                max_ending_here = 0;
+            }
+        }
+        return max_so_far;    
+    }
+}
+#########################################
+class Solution {
+    public int maxProfit(int[] prices) {
+
+        int s = 0;
+        int e = 0;
+        int max_profit = 0;
+        while(e < prices.length){
+            if(prices[e] > prices[s]){
+                max_profit = Math.max(max_profit, prices[e] - prices[s]);
+            }
+                
+            else{
+                s = e;
+            }
+                
+            e += 1;
+        }
+            
+        return max_profit;
+    }
+}
+#########################################
+class Solution
+{
+    public int minOperation(int n)
+    {
+        int count = 0;
+        while(n != 0){
+        if(n % 2 == 0){
+        n /=2;
+        }else{
+        n -= 1;
+        }
+        count++;
+        }
+        return count;
+                
+    }
+}
+##############################################################
+class Solution{
+    static void swap(int[] arr, int i, int j)
+    {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+     
+    
+    static int partition(int[] arr, int low, int high)
+    {
+         
+        // pivot
+        int pivot = arr[high];
+         
+      
+        int i = (low - 1);
+     
+        for(int j = low; j <= high - 1; j++)
+        {
+             
+            // If current element is smaller
+            // than the pivot
+            if (arr[j] < pivot)
+            {
+                 
+                
+                i++;
+                swap(arr, i, j);
+            }
+        }
+        swap(arr, i + 1, high);
+        return (i + 1);
+    }
+     
+    
+    static void quickSort(int[] arr, int low, int high)
+    {
+        if (low < high)
+        {
+             
+          
+            int pi = partition(arr, low, high);
+     
+           
+            quickSort(arr, low, pi - 1);
+            quickSort(arr, pi + 1, high);
+        }
+    }
+
+    static ArrayList<Integer> candyStore(int candies[],int N,int K){
+        // code here
+        ArrayList<Integer> arr = new ArrayList<Integer>();
+        quickSort(candies,0,candies.length-1);
+        // System.out.print(Arrays.toString(candies));
+        int max = 0;
+        int index = 0;
+        for(int i=N-1;i>=index;i--){
+            max = max + candies[i];
+            index += K;
+            // System.out.print(index);
+        }
+        // System.out.print(max);
+        
+        int min = 0;
+        for (int i = 0; i < N; i++) {
+            // Buy current candy
+            min += candies[i];
+ 
+            // And take k candies for free
+            // from the last
+            N = N - K;
+        }
+        
+        arr.add(min);
+        arr.add(max);
+        // arr.add(0);
+        
+        
+        return arr;
+        
+    }
+}
+###########################################################
+class Solution {
+    static int partition(long[] arr, int low, int high)
+    {
+         
+        // pivot
+        long pivot = arr[high];
+         
+       
+        int i = (low - 1);
+     
+        for(int j = low; j <= high - 1; j++)
+        {
+             
+           
+            if (arr[j] < pivot)
+            {
+                 
+               
+                i++;
+                swap(arr, i, j);
+            }
+        }
+        swap(arr, i + 1, high);
+        return (i + 1);
+    }
+     
+   
+    static long[] quickSort(long[] arr, int low, int high)
+    {
+        if (low < high)
+        {
+             
+           
+            int pi = partition(arr, low, high);
+     
+           
+            quickSort(arr, low, pi - 1);
+            quickSort(arr, pi + 1, high);
+        }
+        return arr;
+    }
+    static void swap(long[] arr, int i, int j)
+    {
+        long temp;
+        temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+       
+    }
+
+
+    public long minValue(long a[], long b[], long n) 
+    {
+        // Your code goes here
+        // int min = 0;
+        long minsum = 0;
+        
+        long[] arr1 = new long[a.length];
+        long[] arr2 = new long[b.length];
+        arr1 = quickSort(a,0,a.length-1);
+        arr2 = quickSort(b,0,b.length-1);
+        // arr2 = quickSort(b,b.length-1,0);
+        
+        
+        for(int i=0;i<n;i++){
+            minsum = minsum + arr1[i]*arr2[arr2.length-i-1];
+        }
+        return minsum;
+        
+        
+    }
+}
+##############################################################
+static int partition(long[] arr, int low, int high)
+    {
+         
+        // pivot
+        long pivot = arr[high];
+         
+       
+        int i = (low - 1);
+     
+        for(int j = low; j <= high - 1; j++)
+        {
+             
+           
+            if (arr[j] < pivot)
+            {
+                 
+               
+                i++;
+                swap(arr, i, j);
+            }
+        }
+        swap(arr, i + 1, high);
+        return (i + 1);
+    }
+     
+   
+    static long[] quickSort(long[] arr, int low, int high)
+    {
+        if (low < high)
+        {
+             
+           
+            int pi = partition(arr, low, high);
+     
+           
+            quickSort(arr, low, pi - 1);
+            quickSort(arr, pi + 1, high);
+        }
+        return arr;
+    }
+    static void swap(long[] arr, int i, int j)
+    {
+        long temp;
+        temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+       
+    }
+
+
+#######################################
+class Solution{
+    static String findLargest(int N, int S){
+        // code here
+        int x=9, j=0;
+        String num = "";
+        if(S==0 && N>1)
+            return "-1";
+        while(N>0 && S>=0 && x>=0){
+            if(S>=x){
+                num += Integer.toString(x);
+                S -= x;   
+                N--;
+                j++;
+            }
+            else
+                x--;
+        }
+        if(S!=0)
+         num = "-1";
+        return num;
+    }
+}
+#####################################################
+class Solution{
+    static void swap(int[] arr, int i, int j)
+    {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+     
+    
+    static int partition(int[] arr, int low, int high)
+    {
+         
+        // pivot
+        int pivot = arr[high];
+         
+      
+        int i = (low - 1);
+     
+        for(int j = low; j <= high - 1; j++)
+        {
+             
+            // If current element is smaller
+            // than the pivot
+            if (arr[j] < pivot)
+            {
+                 
+                
+                i++;
+                swap(arr, i, j);
+            }
+        }
+        swap(arr, i + 1, high);
+        return (i + 1);
+    }
+     
+    
+    static void quickSort(int[] arr, int low, int high)
+    {
+        if (low < high)
+        {
+             
+          
+            int pi = partition(arr, low, high);
+     
+           
+            quickSort(arr, low, pi - 1);
+            quickSort(arr, pi + 1, high);
+        }
+    }
+    
+    static int toyCount(int N, int K, int arr[])
+    {
+        int p_toys = 0;
+        int n_toys = 0;
+        // code here
+        quickSort(arr,0,N-1);
+        for(int i=0;i<arr.length;i++){
+            p_toys = p_toys + arr[i];
+            if(p_toys <= K){
+                
+                n_toys = n_toys + 1;
+            }else{
+                p_toys = p_toys - arr[i];
+            }
+        }
+        
+        // System.out.println(p_toys);
+        return n_toys;
+        
+    }
+}
+################################################
+class Solution
+{
+    static void swap(int[] arr,int[] end,int i, int j)
+    {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+        int temp2 = end[i];
+        end[i] = end[j];
+        end[j] = temp2;
+    }
+     
+    
+    static int partition(int[] start, int[] end, int low, int high)
+    {
+         
+        // pivot
+        int pivot = end[high];
+         
+        
+        int i = (low - 1);
+     
+        for(int j = low; j <= high - 1; j++)
+        {
+             
+            
+            if (end[j] < pivot)
+            {
+                 
+                
+                i++;
+                swap(start, end, i, j);
+            }
+        }
+        swap(start, end, i + 1, high);
+        return (i + 1);
+    }
+     
+   
+    static void quickSort(int[] start, int[] end, int low, int high)
+    {
+        if (low < high)
+        {
+             
+            
+            int pi = partition(start, end, low, high);
+     
+            
+            quickSort(start, end, low, pi - 1);
+            quickSort(start, end, pi + 1, high);
+        }
+        // return arr;
+    }
+    
+    public static int activitySelection(int start[], int end[], int n)
+    {
+        
+        int max = 1;
+        int arr1[] = new int[n];
+        int arr2[] = new int[n];
+        
+       
+        
+        int i, j;
+        
+        quickSort(start,end,0,n-1);
+       
+      
+        
+        i = 0;
+        
+        for (j = 1; j < n; j++)
+        {
+             
+             if (start[j] > end[i])
+             {
+                
+                  max = max + 1;
+                  i = j;
+              }
+         }
+        return max;
+        
+    }
+}
+###########################################################
+class Solution
+{
+    //Function to build a Heap from array.
+    void buildHeap(int arr[], int n)
+    {
+        // Your code here
+         int startIdx = (n / 2) - 1;
+  
+        // Perform reverse level order traversal
+        // from last non-leaf node and heapify
+        // each node
+        for (int i = startIdx; i >= 0; i--) {
+            heapify(arr, n, i);
+        }
+    }
+ 
+    //Heapify function to maintain heap property.
+    void heapify(int arr[], int n, int i)
+    {
+        // Your code here
+        int largest = i; // Initialize largest as root
+        int l = 2 * i + 1; // left = 2*i + 1
+        int r = 2 * i + 2; // right = 2*i + 2
+
+        // If left child is larger than root
+        if (l < n && arr[l] > arr[largest])
+            largest = l;
+
+        // If right child is larger than largest so far
+        if (r < n && arr[r] > arr[largest])
+            largest = r;
+
+        // If largest is not root
+        if (largest != i) {
+            int swap = arr[i];
+            arr[i] = arr[largest];
+            arr[largest] = swap;
+
+            // Recursively heapify the affected sub-tree
+            heapify(arr, n, largest);
+        }
+    }
+    
+    //Function to sort an array using Heap Sort.
+    public void heapSort(int arr[], int n)
+    {
+        //code here
+        
+
+        // Build heap (rearrange array)
+        for (int i = n / 2 - 1; i >= 0; i--)
+            heapify(arr, n, i);
+
+        // One by one extract an element from heap
+        for (int i = n - 1; i > 0; i--) {
+            // Move current root to end
+            int temp = arr[0];
+            arr[0] = arr[i];
+            arr[i] = temp;
+
+            // call max heapify on the reduced heap
+            heapify(arr, i, 0);
+        }
+    }
+ }
+ 
+#################################################################
+class Tree
+{
+    static int count = 0;
+    
+    int countLeaves(Node node) 
+    {
+         // Your code
+         
+         if(node.left == null && node.right == null){
+             count = count + 1;
+         }
+         if(node.left != null && node.right != null){
+             countLeaves(node.left);
+             countLeaves(node.right);
+         }else if(node.left == null && node.right != null){
+             countLeaves(node.right);
+         }else if(node.left != null && node.right == null){
+             countLeaves(node.left);
+         }
+         
+         
+    
+    return count;
+    }
+}
+###########################################
+class Solution
+{
+    //Function to convert a binary tree into its mirror tree.
+    Node mirror(Node node)
+    {
+	// Your code here
+	if(node == null){
+	    return node;
+	}
+	Node left=mirror(node.left);
+	Node right = mirror(node.right);
+	node.left = right;
+	node.right = left;
+	return node;
+	
+    }
+}
+###########################################
 class Tree
 {
     //Function to return list containing elements of left view of binary tree.
